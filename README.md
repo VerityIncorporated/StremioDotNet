@@ -1,2 +1,2 @@
-# Stremio.NET
+# StremioDotNet
 .NET Implementation of the Stremio protocol.

@@ -2,7 +2,7 @@
 
 namespace StremioDotNet.Structs.Meta;
 
-public struct MetaBehaviorHints
+public struct BehaviorHints
 {
     [JsonPropertyName("defaultVideoId")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

@@ -24,7 +24,7 @@ public class MetaBuilder(string id, string type, string name)
     private string? country;
     private string? awards;
     private string? website;
-    private MetaBehaviorHints? behaviorHints;
+    private BehaviorHints? behaviorHints;
 
     public MetaBuilder SetGenres(List<string>? genres)
     {
@@ -140,7 +140,7 @@ public class MetaBuilder(string id, string type, string name)
         return this;
     }
 
-    public MetaBuilder SetBehaviorHints(MetaBehaviorHints? behaviorHints)
+    public MetaBuilder SetBehaviorHints(BehaviorHints? behaviorHints)
     {
         this.behaviorHints = behaviorHints;
         return this;

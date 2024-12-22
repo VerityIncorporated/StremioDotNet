@@ -1,5 +1,4 @@
-﻿using StremioDotNet.Structs;
-using StremioDotNet.Structs.Manifest;
+﻿using StremioDotNet.Structs.Manifest;
 
 namespace StremioDotNet.Builders;
 

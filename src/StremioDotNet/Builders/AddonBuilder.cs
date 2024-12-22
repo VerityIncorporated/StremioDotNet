@@ -1,4 +1,5 @@
 ﻿using StremioDotNet.Structs;
+using StremioDotNet.Structs.Manifest;
 
 namespace StremioDotNet.Builders;
 
@@ -8,7 +9,7 @@ public class AddonBuilder(
     string name,
     string description,
     AddonBuilder.Resources[] resources,
-    AddonBuilder.Types[] types,
+    string[] types,
     string[] idPrefixes)
 {
     private BehaviorHints? behaviorHints;
@@ -52,7 +53,7 @@ public class AddonBuilder(
             Name = name,
             Description = description,
             Resources = resources.Select(r => r.ToString().ToLower()).ToArray(),
-            Types = types.Select(t => t.ToString().ToLower()).ToArray(),
+            Types = types,
             IdPrefixes = idPrefixes,
             BehaviorHints = behaviorHints,
             Catalogs = catalogs,
@@ -66,13 +67,5 @@ public class AddonBuilder(
         Catalog,
         Meta,
         Subtitles
-    }
-
-    public enum Types
-    {
-        Movie,
-        Series,
-        Channel,
-        Tv
     }
 }

@@ -1,4 +1,5 @@
 ﻿using StremioDotNet.Structs;
+using StremioDotNet.Structs.Meta;
 
 namespace StremioDotNet.Builders;
 

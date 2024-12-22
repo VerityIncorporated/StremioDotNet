@@ -1,12 +1,18 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace StremioDotNet.Structs;
+namespace StremioDotNet.Structs.Meta;
 
 public struct Meta
 {
+    /// <summary>
+    /// The ID of the meta item that is requested.
+    /// </summary>
     [JsonPropertyName("id")]
     public string Id { get; set; }
 
+    /// <summary>
+    /// The type of the item, e.g. "movie", "series", "channel", "tv", etc.
+    /// </summary>
     [JsonPropertyName("type")]
     public string Type { get; set; }
 
@@ -36,7 +42,7 @@ public struct Meta
     [JsonPropertyName("description")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Description { get; set; }
-
+    
     [JsonPropertyName("releaseInfo")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? ReleaseInfo { get; set; }
@@ -92,72 +98,4 @@ public struct Meta
     [JsonPropertyName("behaviorHints")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public MetaBehaviorHints? BehaviorHints { get; set; }
-}
-
-public struct Trailer
-{
-    [JsonPropertyName("source")]
-    public string Source { get; set; }
-
-    [JsonPropertyName("type")]
-    public string Type { get; set; }
-}
-
-public struct MetaLink
-{
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-
-    [JsonPropertyName("category")]
-    public string Category { get; set; }
-
-    [JsonPropertyName("url")]
-    public string Url { get; set; }
-}
-
-public struct Video
-{
-    [JsonPropertyName("id")]
-    public string Id { get; set; }
-
-    [JsonPropertyName("title")]
-    public string Title { get; set; }
-
-    [JsonPropertyName("released")]
-    public DateTime Released { get; set; }
-
-    [JsonPropertyName("thumbnail")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string Thumbnail { get; set; }
-
-    [JsonPropertyName("streams")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public List<Stream> Streams { get; set; }
-
-    [JsonPropertyName("available")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public bool? Available { get; set; }
-
-    [JsonPropertyName("episode")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public int? Episode { get; set; }
-
-    [JsonPropertyName("season")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public int? Season { get; set; }
-
-    [JsonPropertyName("trailers")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public List<System.IO.Stream> Trailers { get; set; }
-
-    [JsonPropertyName("overview")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string Overview { get; set; }
-}
-
-public struct MetaBehaviorHints
-{
-    [JsonPropertyName("defaultVideoId")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string DefaultVideoId { get; set; }
 }

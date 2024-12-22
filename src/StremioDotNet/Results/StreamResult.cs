@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Stream = StremioDotNet.Structs.Stream;
-using Structs_Stream = StremioDotNet.Structs.Stream;
+using Stream = StremioDotNet.Structs.Stream.Stream;
+using Structs_Stream = StremioDotNet.Structs.Stream.Stream;
 
 namespace StremioDotNet.Results
 {

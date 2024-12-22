@@ -1,6 +1,7 @@
 ﻿using StremioDotNet.Structs;
-using Stream = StremioDotNet.Structs.Stream;
-using Structs_Stream = StremioDotNet.Structs.Stream;
+using StremioDotNet.Structs.Stream;
+using Stream = StremioDotNet.Structs.Stream.Stream;
+using Structs_Stream = StremioDotNet.Structs.Stream.Stream;
 
 namespace StremioDotNet.Builders;
 
@@ -15,7 +16,7 @@ public class StreamBuilder
     private string? description;
     private List<Subtitle>? subtitles = null;
     private List<string>? sources = null;
-    private StreamBehaviorHints? behaviorHints;
+    private BehaviorHints? behaviorHints;
     private long? videoSize;
     private string? filename;
     
@@ -77,7 +78,7 @@ public class StreamBuilder
 
     public StreamBuilder SetBehaviorHints(bool? notWebReady = null, string? bingeGroup = null, Dictionary<string, string>? requestHeaders = null, Dictionary<string, string>? responseHeaders = null)
     {
-        behaviorHints = new StreamBehaviorHints
+        behaviorHints = new BehaviorHints
         {
             NotWebReady = notWebReady ?? behaviorHints?.NotWebReady,
             BingeGroup = bingeGroup ?? behaviorHints?.BingeGroup,

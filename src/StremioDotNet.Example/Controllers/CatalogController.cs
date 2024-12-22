@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using StremioDotNet.Attributes;
 using StremioDotNet.Builders;
 using StremioDotNet.Structs;
+using StremioDotNet.Structs.Meta;
 using static StremioDotNet.Results.CatalogResult;
 
 namespace StremioDotNet.Example.Controllers;

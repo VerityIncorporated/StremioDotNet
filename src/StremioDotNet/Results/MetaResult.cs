@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StremioDotNet.Structs;
+using StremioDotNet.Structs.Meta;
 
 namespace StremioDotNet.Results
 {

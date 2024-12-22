@@ -1,6 +1,7 @@
 using StremioDotNet.Builders;
 using StremioDotNet.Extensions;
 using StremioDotNet.Structs;
+using StremioDotNet.Structs.Manifest;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +28,7 @@ app.UseStremioAddon(() => new AddonBuilder(
     "Example Addon",
     "Example Description",
     [AddonBuilder.Resources.Stream, AddonBuilder.Resources.Meta, AddonBuilder.Resources.Catalog],
-    [AddonBuilder.Types.Movie, AddonBuilder.Types.Series],
+    ["movie", "series"],
     ["tt", "ee"]
 ).SetCatalogs([new Catalog
     {

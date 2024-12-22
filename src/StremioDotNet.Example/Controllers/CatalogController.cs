@@ -2,15 +2,15 @@ using Microsoft.AspNetCore.Mvc;
 using StremioDotNet.Attributes;
 using StremioDotNet.Builders;
 using StremioDotNet.Structs;
-using static StremioDotNet.Results.MetaResult;
+using static StremioDotNet.Results.CatalogResult;
 
-namespace Stremio.ASP.Controllers;
+namespace StremioDotNet.Example.Controllers;
 
 [ApiController]
-public class MetaController : ControllerBase
+public class CatalogController : ControllerBase
 {
-    [MetaHandler]
-    public IActionResult MetaHandler(string type, string id)
+    [CatalogHandler]
+    public IActionResult CatalogHandler(string type, string id)
     {
         var metaBuilder = new MetaBuilder("eeolivertwists", type, "Oliver Twists")
             .SetDescription(
@@ -34,6 +34,6 @@ public class MetaController : ControllerBase
                 }
             ]).Build();
 
-        return Meta(metaBuilder);
+        return Catalog(metaBuilder);
     }
 }

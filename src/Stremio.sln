@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StremioDotNet", "StremioDotNet\StremioDotNet.csproj", "{B9189E6B-FEBA-47AC-A84A-3A7B4997BE86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stremio.ASP", "Stremio.ASP\Stremio.ASP.csproj", "{585234F5-BCD9-46AA-ABD1-ABF047A5DB7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StremioDotNet.Example", "StremioDotNet.Example\StremioDotNet.Example.csproj", "{585234F5-BCD9-46AA-ABD1-ABF047A5DB7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

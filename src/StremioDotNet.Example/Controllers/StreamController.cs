@@ -3,7 +3,7 @@ using StremioDotNet.Attributes;
 using StremioDotNet.Builders;
 using static StremioDotNet.Results.StreamsResult;
 
-namespace Stremio.ASP.Controllers;
+namespace StremioDotNet.Example.Controllers;
 
 [ApiController]
 public class StreamController : ControllerBase

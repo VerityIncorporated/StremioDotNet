@@ -1,2 +1,3 @@
 # StremioDotNet
-.NET Implementation of the Stremio protocol.
+
+Unofficial SDK for Stremio.

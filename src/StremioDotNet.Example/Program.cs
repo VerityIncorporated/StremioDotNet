@@ -36,7 +36,7 @@ app.UseStremioAddon(() => new AddonBuilder(
         Id = "verityMovies",
         Name = "Verity Movies"
     }
-]));
+]).PublishToCentral("https://nathan.rip"));
 
 app.MapControllers();
 

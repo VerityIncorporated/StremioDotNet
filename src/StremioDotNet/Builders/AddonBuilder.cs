@@ -39,6 +39,12 @@ public class AddonBuilder
     // Configuration settings for the Addon.
     private Config[]? config;
 
+    // If we should publish the addon to central.
+    public bool publishToCentral;
+
+    // The domain used when publishing to central.
+    public string publishToCentralDomain;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="AddonBuilder"/> class with required parameters.
     /// </summary>
@@ -110,6 +116,28 @@ public class AddonBuilder
     public AddonBuilder SetConfig(Config[] config)
     {
         this.config = config;
+        return this;
+    }
+    
+    /// <summary>
+    /// Enables publishing the Addon to the Stremio Central repository.
+    /// This makes the Addon publicly available for users to access and install 
+    /// directly from Stremio, provided it is hosted on a publicly accessible domain.
+    /// </summary>
+    /// <param name="domain">
+    /// The publicly accessible domain where the Addon manifest is hosted. 
+    /// This should be a valid URL (e.g., "https://google.com") that 
+    /// points to the manifest file required for publishing the Addon.
+    /// </param>
+    /// <returns>The updated <see cref="AddonBuilder"/> instance.</returns>
+    /// <remarks>
+    /// Ensure the manifest URL is publicly accessible before invoking this method. 
+    /// This step is critical for the Stremio Central repository to index the Addon.
+    /// </remarks>
+    public AddonBuilder PublishToCentral(string domain)
+    {
+        publishToCentral = true;
+        publishToCentralDomain = domain;
         return this;
     }
 

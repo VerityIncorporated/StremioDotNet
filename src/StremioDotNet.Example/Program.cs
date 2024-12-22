@@ -22,7 +22,7 @@ app.UseRouting();
 
 app.UseHttpsRedirection();
 
-app.UseStremioAddon(() => new AddonBuilder(
+AddonBuilder ConfigureAddon() => new AddonBuilder(
     "com.example",
     "1.0.0",
     "Example Addon",
@@ -30,13 +30,23 @@ app.UseStremioAddon(() => new AddonBuilder(
     [AddonBuilder.Resources.Stream, AddonBuilder.Resources.Meta, AddonBuilder.Resources.Catalog],
     ["movie", "series"],
     ["tt", "ee"]
-).SetCatalogs([new Catalog
+).SetCatalogs([
+    new Catalog
     {
         Type = "movie",
         Id = "verityMovies",
         Name = "Verity Movies"
     }
-]).PublishToCentral("https://nathan.rip"));
+]);
+
+if (app.Environment.IsProduction())
+{
+    app.UseStremioAddon(() => ConfigureAddon().PublishToCentral("https://stremio.nathan.rip")); // if its production we want to publish it.
+}
+else
+{
+    app.UseStremioAddon(ConfigureAddon);
+}
 
 app.MapControllers();
 

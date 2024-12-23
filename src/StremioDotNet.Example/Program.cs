@@ -1,6 +1,5 @@
 using StremioDotNet.Builders;
 using StremioDotNet.Extensions;
-using StremioDotNet.Structs;
 using StremioDotNet.Structs.Manifest;
 
 var builder = WebApplication.CreateBuilder(args);

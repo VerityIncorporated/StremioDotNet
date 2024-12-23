@@ -4,7 +4,35 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        
+        <!-- NuGet Package Metadata -->
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>StremioDotNet</PackageId>
+        <Version>1.0.1</Version>
+        <Authors>Verity</Authors>
+        <Description>A .NET SDK for implementing Stremio Add-on Protocols. This library allows developers to create Stremio add-ons in C#.</Description>
+        <PackageTags>Stremio;StremioSDK;DotNet;CSharp;Media;Addons</PackageTags>
+        <RepositoryUrl>https://github.com/VerityIncorporated/StremioDotNet</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <Icon>icon.png</Icon>
     </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DocumentationFile>bin\Debug\AttrMiddleware.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DocumentationFile>bin\Release\AttrMiddleware.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="icon.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
 
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />

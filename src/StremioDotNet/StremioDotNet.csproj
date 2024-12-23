@@ -4,11 +4,13 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         
         <!-- NuGet Package Metadata -->
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>StremioDotNet</PackageId>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
         <Authors>Verity</Authors>
         <Description>A .NET SDK for implementing Stremio Add-on Protocols. This library allows developers to create Stremio add-ons in C#.</Description>
         <PackageTags>Stremio;StremioSDK;DotNet;CSharp;Media;Addons</PackageTags>
@@ -17,13 +19,9 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageIcon>icon.png</PackageIcon>
     </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <DocumentationFile>bin\Debug\AttrMiddleware.xml</DocumentationFile>
-    </PropertyGroup>
-
+    
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <DocumentationFile>bin\Release\AttrMiddleware.xml</DocumentationFile>
+        <DocumentationFile>bin\Release\StremioDotNet.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>

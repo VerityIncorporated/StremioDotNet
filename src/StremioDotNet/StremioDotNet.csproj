@@ -15,7 +15,7 @@
         <RepositoryUrl>https://github.com/VerityIncorporated/StremioDotNet</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <Icon>icon.png</Icon>
+        <PackageIcon>icon.png</PackageIcon>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

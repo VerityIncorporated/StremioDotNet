@@ -8,7 +8,7 @@
         <!-- NuGet Package Metadata -->
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>StremioDotNet</PackageId>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <Authors>Verity</Authors>
         <Description>A .NET SDK for implementing Stremio Add-on Protocols. This library allows developers to create Stremio add-ons in C#.</Description>
         <PackageTags>Stremio;StremioSDK;DotNet;CSharp;Media;Addons</PackageTags>

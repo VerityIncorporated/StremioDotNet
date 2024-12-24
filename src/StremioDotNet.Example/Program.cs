@@ -33,8 +33,8 @@ AddonBuilder ConfigureAddon() => new AddonBuilder(
     new Catalog
     {
         Type = "movie",
-        Id = "verityMovies",
-        Name = "Verity Movies"
+        Id = "stremioDotNet",
+        Name = "StremioDotNet Movies"
     }
 ]);
 

@@ -51,6 +51,6 @@ public static class IApplicationBuilderExtensions
         if (!builder.publishToCentral) return;
         
         var httpClient = app.ApplicationServices.GetService(typeof(HttpClient)) as HttpClient;
-        AddonPublisher.PublishToCentral(builder.publishToCentralDomain, httpClient!);
+        AddonPublisher.PublishToCentral(builder.publishToCentralDomain!, httpClient!);
     }
 }

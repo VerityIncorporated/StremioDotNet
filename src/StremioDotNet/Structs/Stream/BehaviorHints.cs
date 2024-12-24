@@ -53,7 +53,7 @@ public struct BehaviorHints
     public long? VideoSize { get; set; }
 
     /// <summary>
-    /// The filename of the video file. It is recommended to set this value when using <see cref="Url"/> to help identify
+    /// The filename of the video file. It is recommended to set this value when using <see cref="Stream.Url"/> to help identify
     /// the correct subtitles.
     /// </summary>
     [JsonPropertyName("filename")]

@@ -38,12 +38,16 @@ public class AddonBuilder
         
     // Configuration settings for the Addon.
     private Config[]? config;
-
-    // If we should publish the addon to central.
+    
+    /// <summary>
+    /// If we should publish the addon to central.
+    /// </summary>
     public bool publishToCentral;
-
-    // The domain used when publishing to central.
-    public string publishToCentralDomain;
+    
+    /// <summary>
+    /// The domain used when publishing to central.
+    /// </summary>
+    public string? publishToCentralDomain;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AddonBuilder"/> class with required parameters.

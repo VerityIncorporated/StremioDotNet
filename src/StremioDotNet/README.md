@@ -1,5 +1,3 @@
-![icon](https://github.com/user-attachments/assets/0211f3c2-4440-4114-9653-c5e4492b5dbe)
-
 # StremioDotNet
 
 StremioDotNet is an unofficial C# implementation of the [Stremio](https://www.stremio.com/) Add-on SDK. It simplifies the creation and deployment of Stremio add-ons with an intuitive API and seamless integration with ASP.NET Core.

@@ -1,16 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFrameworks>net8.0;net7.0;net6.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <LangVersion>12.0</LangVersion>
 
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         
         <!-- NuGet Package Metadata -->
         <PackageId>StremioDotNet</PackageId>
-        <Version>1.0.3</Version>
+        <Version>1.0.4</Version>
         <Authors>Verity</Authors>
         <Description>A .NET SDK for implementing Stremio Add-on Protocols. This library allows developers to create Stremio add-ons in C#.</Description>
         <PackageTags>Stremio;StremioSDK;DotNet;CSharp;Media;Addons</PackageTags>

@@ -10,13 +10,7 @@ StremioDotNet is an unofficial C# implementation of the [Stremio](https://www.st
 - **Publishing**: Publish add-ons directly to the Stremio Central repository.
 - **Extensibility**: Integrates seamlessly with ASP.NET Core applications using middleware and service extensions.
 
-## Installation
-
-Install StremioDotNet via [NuGet](https://www.nuget.org/packages/StremioDotNet):
-
-```bash
-dotnet add package StremioDotNet
-```
+## [Documentation](https://bookstack.nathan.rip/books/stremiodotnet)
 
 ## License
 

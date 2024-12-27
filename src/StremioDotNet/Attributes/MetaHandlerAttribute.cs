@@ -16,7 +16,7 @@ public class MetaHandlerAttribute : HttpMethodAttribute
     /// The URL pattern follows the format "meta/{type}/{id}.json", where {type} and {id} are dynamic parameters.
     /// </summary>
     public MetaHandlerAttribute()
-        : base(["GET"], "meta/{type}/{id}.json")
+        : base(["GET"], "meta/{config?}/{type}/{id}/{extra?}")
     {
     }
 }

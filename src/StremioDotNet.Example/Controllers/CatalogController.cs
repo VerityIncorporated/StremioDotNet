@@ -11,7 +11,7 @@ namespace StremioDotNet.Example.Controllers;
 public class CatalogController : ControllerBase
 {
     [CatalogHandler]
-    public IActionResult CatalogHandler(string type, string id)
+    public IActionResult CatalogHandler(string? config, string type, string id)
     {
         var metaBuilder = new MetaBuilder("eeolivertwists", type, "Oliver Twists")
             .SetDescription(

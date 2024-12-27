@@ -16,7 +16,7 @@ public class CatalogHandlerAttribute : HttpMethodAttribute
     /// The URL pattern follows the format "catalog/{type}/{id}.json", where {type} and {id} are dynamic parameters.
     /// </summary>
     public CatalogHandlerAttribute()
-        : base(["GET"], "catalog/{type}/{id}.json")
+        : base(["GET"], "catalog/{config?}/{type}/{id}/{extra?}")
     {
     }
 }

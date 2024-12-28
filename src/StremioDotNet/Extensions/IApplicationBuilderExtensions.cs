@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Fluid;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using StremioDotNet.Builders;
 using StremioDotNet.Middleware;
@@ -55,11 +57,56 @@ public static class IApplicationBuilderExtensions
                 // Send the manifest as a JSON response
                 await context.Response.WriteAsJsonAsync(manifest);
             });
+            
+            endpoints.MapGet("/configuration", async context =>
+            {
+                // Build the manifest object (e.g., app configuration or settings)
+                var manifest = builder.BuildManifest();
+    
+                // Create a FluidParser instance to handle template parsing
+                var parser = new FluidParser();
+
+                // Attempt to parse the embedded HTML template for the configuration page
+                if (parser.TryParse(GetEmbeddedResource("StremioDotNet.Templates.Configuration.html"), 
+                        out var template, out var error))
+                {
+                    // Create a TemplateContext with the manifest data to pass to the template
+                    var templateContext = new TemplateContext(manifest);
+                    var renderedHtml = await template.RenderAsync(templateContext);
+                    
+                    // Set the response content type to "text/html"
+                    context.Response.ContentType = "text/html";
+    
+                    // Write a simple response (could be updated with dynamic HTML content)
+                    await context.Response.WriteAsync(renderedHtml);
+                }
+                else
+                {
+                    context.Response.StatusCode = 500;
+                    await context.Response.WriteAsync($"Error parsing template: {error ?? "Unknown error"}");
+                }
+            });
         });
 
         if (!builder.publishToCentral) return;
         
         var httpClient = app.ApplicationServices.GetService(typeof(HttpClient)) as HttpClient;
         AddonPublisher.PublishToCentral(builder.publishToCentralDomain!, httpClient!);
+    }
+    
+    static string GetEmbeddedResource(string resourceName)
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+        
+        using var stream = assembly.GetManifestResourceStream(resourceName);
+        
+        if (stream == null)
+        {
+            throw new FileNotFoundException($"Resource '{resourceName}' not found.");
+        }
+
+        using var reader = new StreamReader(stream);
+        
+        return reader.ReadToEnd();
     }
 }

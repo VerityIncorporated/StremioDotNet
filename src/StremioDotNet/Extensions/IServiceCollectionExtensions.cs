@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using StremioDotNet.Middleware;
+using StremioDotNet.ModelBinders;
 
 namespace StremioDotNet.Extensions;
 
@@ -45,5 +46,11 @@ public static class IServiceCollectionExtensions
             
         // Register IMDb ID resolution middleware to be used in the request pipeline
         services.AddScoped<ImdbIdResolutionMiddleware>();
+        
+        // Modify MvcOptions to include custom model binder provider
+        services.Configure<Microsoft.AspNetCore.Mvc.MvcOptions>(options =>
+        {
+            options.ModelBinderProviders.Insert(0, new ConfigModelBinderProvider());
+        });
     }
 }

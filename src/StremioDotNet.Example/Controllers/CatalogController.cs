@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using StremioDotNet.Attributes;
 using StremioDotNet.Builders;
-using StremioDotNet.Structs;
 using StremioDotNet.Structs.Meta;
 using static StremioDotNet.Results.CatalogResult;
 
@@ -11,9 +10,13 @@ namespace StremioDotNet.Example.Controllers;
 public class CatalogController : ControllerBase
 {
     [CatalogHandler]
-    [CatalogHandler(true)]
-    public IActionResult CatalogHandler(string? config, string type, string id, string? extra)
+    [CatalogHandler(typeof(Config))]
+    public IActionResult CatalogHandler(Config? config, string type, string id, string? extra)
     {
+        // I can now use config here!
+        
+        Console.WriteLine($"Something: {config.Something}");
+        
         var metaBuilder = new MetaBuilder("eeolivertwists", type, "Oliver Twists")
             .SetDescription(
                 "Meet Oliver, a once-adorable ferret turned unhinged party animal with a crippling addiction to powdered anise (a.k.a. “The Spice”). In the sleepy town of Dusty Pines, Oliver’s spiral into the shady world of exotic pet narcotics starts innocently enough—a nip here, a snort there—until he becomes the unexpected kingpin of a black market operation run from beneath the snack aisle of the local pet store.\n\nThings get hairy when Oliver’s empire threatens the turf of Squeaky Malone, a power-hungry guinea pig with delusions of grandeur. Forced to fight for his life and his stash, Oliver teams up with Polly, a caffeine-addicted parrot who swears she was once a pirate, and Mr. Whiskers, a washed-up alley cat who “used to be somebody in the cat food commercials.” Together, they must dodge animal control, outwit their rivals, and help Oliver face the hardest challenge of all: kicking his addiction before his entire empire (and his beloved hammock) comes crashing down.\n\nPacked with ferret acrobatics, absurd animal hijinks, and one too many litterbox metaphors, Oliver Twists is a no-holds-barred satire of addiction, ambition, and the surprisingly cutthroat world of pet store politics. Rated PG-13 for mild fur-flying action and excessive use of squeak puns.\n")

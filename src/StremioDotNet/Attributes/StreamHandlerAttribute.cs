@@ -33,8 +33,8 @@ public class StreamHandlerAttribute : HttpMethodAttribute
     /// <param name="type">The type of the stream, such as "movie" or "series".</param>
     /// <param name="resolveImdbId">A flag indicating whether to resolve the IMDb ID and retrieve associated metadata (defaults to false).</param>
     /// <param name="usingConfig">A flag indicating whether to use the config route for requests.</param>
-    public StreamHandlerAttribute(string type, bool resolveImdbId = false, bool usingConfig = false)
-        : base(["GET"], usingConfig ? $"{{config}}/stream/{type}/{{id}}/{{extra?}}" : $"stream/{type}/{{id}}/{{extra?}}")
+    public StreamHandlerAttribute(string type, bool resolveImdbId = false, Type? configType = null)
+        : base(["GET"], configType != null ? $"{{config}}/stream/{type}/{{id}}/{{extra?}}" : $"stream/{type}/{{id}}/{{extra?}}")
     {
         Type = type;
         ResolveImdbId = resolveImdbId;

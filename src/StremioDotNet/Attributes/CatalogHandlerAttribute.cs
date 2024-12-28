@@ -15,8 +15,8 @@ public class CatalogHandlerAttribute : HttpMethodAttribute
     /// This attribute binds the decorated method to a GET request for retrieving catalog data.
     /// The URL pattern follows the format "catalog/{type}/{id}.json", where {type} and {id} are dynamic parameters.
     /// </summary>
-    public CatalogHandlerAttribute(bool usingConfig = false)
-        : base(["GET"], usingConfig ? "{config}/catalog/{type}/{id}/{extra?}" : "catalog/{type}/{id}/{extra?}")
+    public CatalogHandlerAttribute(Type? configType = null)
+        : base(["GET"], configType != null ? "{config}/catalog/{type}/{id}/{extra?}" : "catalog/{type}/{id}/{extra?}")
     {
     }
 }

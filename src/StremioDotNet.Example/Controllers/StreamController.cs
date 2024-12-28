@@ -8,7 +8,7 @@ namespace StremioDotNet.Example.Controllers;
 [ApiController]
 public class StreamController : ControllerBase
 {
-    [StreamHandler("movie", true)]
+    [StreamHandler("movie")]
     public IActionResult MovieHandler(string id)
     {
         dynamic? metadata = HttpContext.Items[id];

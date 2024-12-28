@@ -7,7 +7,7 @@ namespace StremioDotNet.Attributes;
 /// This attribute maps a method to a specific HTTP GET request pattern that retrieves metadata 
 /// based on the type and ID provided in the URL.
 /// </summary>
-[AttributeUsage(AttributeTargets.Method, Inherited = false)]
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
 public class MetaHandlerAttribute : HttpMethodAttribute
 {
     /// <summary>
@@ -15,8 +15,8 @@ public class MetaHandlerAttribute : HttpMethodAttribute
     /// This attribute binds the decorated method to a GET request for retrieving metadata.
     /// The URL pattern follows the format "meta/{type}/{id}.json", where {type} and {id} are dynamic parameters.
     /// </summary>
-    public MetaHandlerAttribute()
-        : base(["GET"], "meta/{config?}/{type}/{id}/{extra?}")
+    public MetaHandlerAttribute(bool usingConfig = false)
+        : base(["GET"], usingConfig ? "{config}/meta/{type}/{id}/{extra?}" : "meta/{type}/{id}/{extra?}" )
     {
     }
 }

@@ -7,7 +7,7 @@ namespace StremioDotNet.Attributes;
 /// This attribute maps a method to a specific HTTP GET request pattern that retrieves catalog information 
 /// based on the type and ID provided in the URL.
 /// </summary>
-[AttributeUsage(AttributeTargets.Method, Inherited = false)]
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
 public class CatalogHandlerAttribute : HttpMethodAttribute
 {
     /// <summary>
@@ -15,8 +15,8 @@ public class CatalogHandlerAttribute : HttpMethodAttribute
     /// This attribute binds the decorated method to a GET request for retrieving catalog data.
     /// The URL pattern follows the format "catalog/{type}/{id}.json", where {type} and {id} are dynamic parameters.
     /// </summary>
-    public CatalogHandlerAttribute()
-        : base(["GET"], "catalog/{config?}/{type}/{id}/{extra?}")
+    public CatalogHandlerAttribute(bool usingConfig = false)
+        : base(["GET"], usingConfig ? "{config}/catalog/{type}/{id}/{extra?}" : "catalog/{type}/{id}/{extra?}")
     {
     }
 }

@@ -46,6 +46,15 @@ public static class IApplicationBuilderExtensions
                 // Send the manifest as a JSON response
                 await context.Response.WriteAsJsonAsync(manifest);
             });
+            
+            endpoints.MapGet("{config?}/manifest.json", async context =>
+            {
+                // Build the addon manifest using the provided AddonBuilder
+                var manifest = builder.BuildManifest();
+                
+                // Send the manifest as a JSON response
+                await context.Response.WriteAsJsonAsync(manifest);
+            });
         });
 
         if (!builder.publishToCentral) return;

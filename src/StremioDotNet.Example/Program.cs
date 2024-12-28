@@ -34,7 +34,19 @@ AddonBuilder ConfigureAddon() => new AddonBuilder(
     {
         Type = "movie",
         Id = "stremioDotNet",
-        Name = "StremioDotNet Movies"
+        Name = "StremioDotNet Movies",
+        Extra = [new Extra
+            {
+                Name = "search",
+                IsRequired = false,
+            }
+        ]
+    }
+]).SetBehaviorHints(configurable: true).SetConfig([new Config
+    {
+        Key = "testkey",
+        Type = Config.ConfigType.Text,
+        Title = "Test",
     }
 ]);
 

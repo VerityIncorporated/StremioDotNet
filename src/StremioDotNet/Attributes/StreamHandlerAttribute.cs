@@ -7,7 +7,7 @@ namespace StremioDotNet.Attributes;
 /// This attribute maps a method to a specific HTTP GET request pattern for retrieving stream information
 /// based on the type and ID provided in the URL.
 /// </summary>
-[AttributeUsage(AttributeTargets.Method, Inherited = false)]
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
 public class StreamHandlerAttribute : HttpMethodAttribute
 {
     /// <summary>
@@ -32,8 +32,8 @@ public class StreamHandlerAttribute : HttpMethodAttribute
     /// </summary>
     /// <param name="type">The type of the stream, such as "movie" or "series".</param>
     /// <param name="resolveImdbId">A flag indicating whether to resolve the IMDb ID and retrieve associated metadata (defaults to false).</param>
-    public StreamHandlerAttribute(string type, bool resolveImdbId = false)
-        : base(["GET"], $"stream/{{config?}}/{type}/{{id}}/{{extra?}}")
+    public StreamHandlerAttribute(string type, bool resolveImdbId = false, bool usingConfig = false)
+        : base(["GET"], usingConfig ? $"{{config}}/stream/{type}/{{id}}/{{extra?}}" : $"stream/{type}/{{id}}/{{extra?}}")
     {
         Type = type;
         ResolveImdbId = resolveImdbId;

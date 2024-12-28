@@ -10,7 +10,7 @@ namespace StremioDotNet.Example.Controllers;
 [ApiController]
 public class MetaController : ControllerBase
 {
-    [MetaHandler]
+    [MetaHandler(true)]
     public IActionResult MetaHandler(string type, string id)
     {
         var metaBuilder = new MetaBuilder("eeolivertwists", type, "Oliver Twists")

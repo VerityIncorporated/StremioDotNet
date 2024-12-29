@@ -76,6 +76,12 @@ AddonBuilder ConfigureAddon() => new AddonBuilder(
         Title = "Test Select",
         Options = ["Select This", "Select That"]
     },
+    new Config
+    {
+        Key = "testNumber",
+        Type = Config.ConfigType.Number,
+        Title = "Test Number",
+    },
 ]);
 
 if (app.Environment.IsProduction())

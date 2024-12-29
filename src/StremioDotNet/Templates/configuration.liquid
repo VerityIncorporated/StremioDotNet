@@ -55,7 +55,7 @@
                 margin-bottom: 1em;
             }
         }
-        input {
+        input, select {
             padding: 0.5em;
             border-radius: 0.5em;
             background-color: #222222;
@@ -63,10 +63,14 @@
             box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
             border: 1px inset transparent;
             font-size: 1em;
+            outline: none;
         }
         input:focus {
             outline: none;
             border-color: rgba(255, 144, 0);
+        }
+        input[type="checkbox"] {
+            box-shadow: 0 0 0 0;
         }
         label {
             display: block;

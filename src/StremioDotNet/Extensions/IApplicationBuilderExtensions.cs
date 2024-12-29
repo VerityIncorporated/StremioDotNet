@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using StremioDotNet.Builders;
 using StremioDotNet.Middleware;
+using StremioDotNet.Structs.Manifest;
 
 namespace StremioDotNet.Extensions;
 
@@ -67,11 +68,13 @@ public static class IApplicationBuilderExtensions
                 var parser = new FluidParser();
 
                 // Attempt to parse the embedded HTML template for the configuration page
-                if (parser.TryParse(GetEmbeddedResource("StremioDotNet.Templates.Configuration.html"), 
+                if (parser.TryParse(GetEmbeddedResource("StremioDotNet.Templates.configuration.liquid"), 
                         out var template, out var error))
                 {
                     // Create a TemplateContext with the manifest data to pass to the template
                     var templateContext = new TemplateContext(manifest);
+                    templateContext.Options.MemberAccessStrategy.Register<Config>();
+                    templateContext.Options.MemberAccessStrategy.Register<Config.ConfigType>();
                     var renderedHtml = await template.RenderAsync(templateContext);
                     
                     // Set the response content type to "text/html"

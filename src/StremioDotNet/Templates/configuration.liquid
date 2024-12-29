@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ Name }}</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            background-color: black;
+            color: white;
+        }
+        body {
+            display: flex;
+            flex-flow: column;
+            height: 100vh;
+        }
+        .flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .centerer-flex {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1 1 auto;
+        }
+        .main-div {
+            width: 40vw;
+        }
+        .main-div, .top {
+            background-color: rgba(17, 17, 17, 0.9);
+            padding: 1em;
+            border-radius: 1em;
+            border: 2px solid rgba(255, 144, 0);
+            z-index: 1;
+            box-shadow: 0 5px 7px rgba(0, 0, 0, 0.25);
+        }
+        .top {
+            margin: 2em auto;
+            text-align: center;
+            flex: 0 0 auto;
+        }
+        h1 {
+            margin: 0;
+        }
+        .entry-div {
+            display: flex;
+            flex-direction: column;
+            &:not(:last-child) {
+                margin-bottom: 1em;
+            }
+        }
+        input {
+            padding: 0.5em;
+            border-radius: 0.5em;
+            background-color: #222222;
+            color: white;
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+            border: 1px inset transparent;
+            font-size: 1em;
+        }
+        input:focus {
+            outline: none;
+            border-color: rgba(255, 144, 0);
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5em;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="background" style="position: fixed; top: 0; left: 0;"></canvas>
+    <div class="flex">
+        <div class="top">
+            <h1>{{Name}} Config</h1>
+        </div>
+    </div>
+    <div class="centerer-flex">
+        <div class="main-div">
+            {% for setting in Config %}
+                <div class="entry-div">
+                    <label for="{{setting.Key}}">{{setting.Title}}</label>
+                    {% if setting.Type == 0 %}
+                        <input type="text" id="{{setting.Key}}" name="{{setting.Title}}">
+                    {% endif %}
+                    {% if setting.Type == 1 %}
+                        <input type="number" id="{{setting.Key}}" name="{{setting.Title}}">
+                    {% endif %}
+                    {% if setting.Type == 2 %}
+                        <input type="checkbox" id="{{setting.Key}}" name="{{setting.Title}}">
+                    {% endif %}
+                    {% if setting.Type == 3 %}
+                        <input type="password" id="{{setting.Key}}" name="{{setting.Title}}">
+                    {% endif %}
+                    {% if setting.Type == 4 %}
+                        <select id="{{setting.Key}}" name="{{setting.Title}}">
+                            {% for option in setting.Options %}
+                                <option value="{{option.Value}}">{{option.Text}}</option>
+                            {% endfor %}
+                        </select>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        const canvas = document.getElementById('background');
+        const context = canvas.getContext('2d');
+        
+        class Vec2 {
+            x;
+            y;
+            vx = 0;
+            vy = 0;
+            velocities = [];
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+        }
+
+        const thickness = 1;
+        let spacing = 25;
+        const strength = 0.25 * Math.random() + 0.4;
+        const radius = 50 * Math.random() + 75;
+        const stiffness = 0.0745 * Math.random() + 0.005;
+        const damping = 0.2 * Math.random() + 0.8;
+        const period = 2 * Math.PI * Math.sqrt(1 / stiffness);
+        let vectors = [];
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvas.style.width = window.innerWidth + "px";
+            canvas.style.height = window.innerHeight + "px";
+
+            vectors = [];
+            for (let i = 0; i < canvas.width; i += spacing) {
+                vectors.push([]);
+                for (let j = 0; j < canvas.height; j += spacing) {
+                    vectors[i / spacing].push(new Vec2(0, 0));
+                }
+            }
+            draw();
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('load', resizeCanvas);
+        window.addEventListener('mousemove', cursorMoved);
+
+        function cursorMoved(event) {
+            const x1 = event.clientX;
+            const y1 = event.clientY;
+            const x2 = event.clientX - event.movementX;
+            const y2 = event.clientY - event.movementY;
+            
+            for (let i = 0; i < vectors.length; i++) {
+                for (let j = 0; j < vectors[i].length; j++) {
+                    let vecx = i * spacing + vectors[i][j].x;
+                    let vecy = j * spacing + vectors[i][j].y;
+                    
+                    let distance = distToSegment({ x: vecx, y: vecy }, { x: x1, y: y1 }, { x: x2, y: y2 });
+                    if (distance < radius) {
+                        vectors[i][j].x += event.movementX * strength * (1 - distance / radius);
+                        vectors[i][j].y += event.movementY * strength * (1 - distance / radius);
+                    }
+                }
+            }
+        }
+        
+        let frames = 0;
+
+        function draw() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.lineWidth = thickness;
+
+            for (let i = 0; i < vectors.length; i++) {
+                for (let j = 0; j < vectors[i].length; j++) {
+                    let vec = vectors[i][j];
+                    vec.velocities.push({ x: vec.vx, y: vec.vy });
+                    if (vec.velocities.length > period) {
+                        vec.velocities.shift();
+                    }
+
+                    let dx = vec.x;
+                    let dy = vec.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    let springForce = distance * stiffness;
+                    let springX = dx / distance * springForce;
+                    let springY = dy / distance * springForce;
+                    
+                    if (isNaN(springX) || isNaN(springY)) {
+                        springX = 0;
+                        springY = 0;
+                    }
+
+                    vec.vx -= springX;
+                    vec.vy -= springY;
+
+                    vec.vx *= damping;
+                    vec.vy *= damping;
+
+                    vec.x += vec.vx;
+                    vec.y += vec.vy;
+                }
+            }
+
+            for (let i = 0; i < vectors.length - 1; i++) {
+                for (let j = 0; j < vectors[i].length - 1; j++) {
+                    let vec = vectors[i][j];
+                    let x = i * spacing;
+                    let y = j * spacing;
+                    let movedX = x + vec.x;
+                    let movedY = y + vec.y;
+                    
+                    let x2 = x + spacing;
+                    let y2 = y;
+                    let movedX2 = x2 + vectors[i + 1][j].x;
+                    let movedY2 = y2 + vectors[i + 1][j].y;
+                    
+                    let x3 = x;
+                    let y3 = y + spacing;
+                    let movedX3 = x3 + vectors[i][j + 1].x;
+                    let movedY3 = y3 + vectors[i][j + 1].y;
+
+                    let maxX = 0;
+                    let maxY = 0;
+                    for (let k = 0; k < vec.velocities.length; k++) {
+                        maxX = Math.max(maxX, Math.abs(vec.velocities[k].x));
+                        maxY = Math.max(maxY, Math.abs(vec.velocities[k].y));
+                    }
+                    let velocity = Math.sqrt(maxX * maxX + maxY * maxY);
+                    context.strokeStyle = getColor(velocity);
+                    context.beginPath();
+                    context.moveTo(movedX, movedY);
+                    context.lineTo(movedX2, movedY2);
+                    context.stroke();
+                    
+                    context.beginPath();
+                    context.moveTo(movedX, movedY);
+                    context.lineTo(movedX3, movedY3);
+                    context.stroke();
+                }
+            }
+            
+            frames++;
+        }
+        
+        setInterval(draw, 1000 / 60);
+        
+        setTimeout(
+            () =>
+                setInterval(() => {
+                    if (frames < 30 && frames !== 0) {
+                        console.log('Increasing spacing, frames: ' + frames);
+                        spacing += 2;
+                        resizeCanvas();
+                    }
+                }, 500)
+            , 1000
+        ); // If the device is too slow, increase the spacing to reduce the load
+
+        function sqr(x) { return x * x }
+        function dist2(v, w) { return sqr(v.x - w.x) + sqr(v.y - w.y) }
+        function distToSegmentSquared(p, v, w) {
+            const l2 = dist2(v, w);
+            if (l2 === 0) return dist2(p, v);
+            let t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
+            t = Math.max(0, Math.min(1, t));
+            return dist2(p, { x: v.x + t * (w.x - v.x),
+                y: v.y + t * (w.y - v.y) });
+        }
+        function distToSegment(p, v, w) { return Math.sqrt(distToSegmentSquared(p, v, w)); }
+        function getColor(velocity) {
+            const maxVelocity = 10;
+            const minColor = { r: 255, g: 255, b: 255, a: 0.1 };
+            const maxColor = { r: 255, g: 144, b: 0, a: 0.4 };
+
+            const t = Math.min(velocity / maxVelocity, 1);
+
+            const r = minColor.r + t * (maxColor.r - minColor.r);
+            const g = minColor.g + t * (maxColor.g - minColor.g);
+            const b = minColor.b + t * (maxColor.b - minColor.b);
+            const a = minColor.a + t * (maxColor.a - minColor.a);
+
+            return `rgba(${r}, ${g}, ${b}, ${a})`;
+        }
+    </script>
+</body>
+</html>

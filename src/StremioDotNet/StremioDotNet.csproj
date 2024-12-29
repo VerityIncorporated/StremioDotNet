@@ -40,7 +40,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Templates\Configuration.html" />
+        <EmbeddedResource Include="Templates\configuration.liquid" />
     </ItemGroup>
 
 </Project>

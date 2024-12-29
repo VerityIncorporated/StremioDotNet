@@ -39,6 +39,10 @@ public class AddonBuilder
     // Configuration settings for the Addon.
     private Config[]? config;
     
+    // Optional logo and background image URLs
+    private string? logo;
+    private string? background;
+    
     /// <summary>
     /// If we should publish the addon to central.
     /// </summary>
@@ -124,6 +128,28 @@ public class AddonBuilder
     }
     
     /// <summary>
+    /// Sets the logo URL for the Addon.
+    /// </summary>
+    /// <param name="logoUrl">The URL of the logo image (256x256 PNG).</param>
+    /// <returns>The updated <see cref="AddonBuilder"/> instance.</returns>
+    public AddonBuilder SetLogo(string logoUrl)
+    {
+        logo = logoUrl;
+        return this;
+    }
+
+    /// <summary>
+    /// Sets the background image URL for the Addon.
+    /// </summary>
+    /// <param name="backgroundUrl">The URL of the background image (minimum 1024x786 PNG or JPG).</param>
+    /// <returns>The updated <see cref="AddonBuilder"/> instance.</returns>
+    public AddonBuilder SetBackground(string backgroundUrl)
+    {
+        background = backgroundUrl;
+        return this;
+    }
+    
+    /// <summary>
     /// Enables publishing the Addon to the Stremio Central repository.
     /// This makes the Addon publicly available for users to access and install 
     /// directly from Stremio, provided it is hosted on a publicly accessible domain.
@@ -162,7 +188,9 @@ public class AddonBuilder
             IdPrefixes = idPrefixes,
             BehaviorHints = behaviorHints,
             Catalogs = catalogs,
-            Config = config
+            Config = config,
+            Logo = logo,
+            Background = background
         };
     }
 

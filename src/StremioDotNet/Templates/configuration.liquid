@@ -77,6 +77,57 @@
             margin-bottom: 0.5em;
             font-size: 1.2em;
         }
+        .checkbox-container {
+            display: flex;
+            justify-content: flex-start;
+            margin: 10px;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 16px;
+            user-select: none;
+        }
+
+        .checkbox input {
+            display: none;
+        }
+
+        .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #444;
+            border-radius: 4px;
+            margin-left: 10px;
+            transition: background-color 0.3s, border-color 0.3s;
+            position: relative;
+        }
+        
+        .checkbox input:checked + .checkmark {
+            background-color: #FF9000;
+            border-color: #FF9000;
+        }
+
+        .checkbox input:checked + .checkmark:before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 12px;
+            height: 12px;
+        }
+
+        .checkbox:hover .checkmark {
+            border-color: #888;
+        }
+
+        .checkbox input:focus + .checkmark {
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 144, 0, 0.6);
+        }
     </style>
 </head>
 <body>
@@ -90,7 +141,11 @@
         <div class="main-div">
             {% for setting in Config %}
                 <div class="entry-div">
-                    <label for="{{setting.Key}}">{{setting.Title}}</label>
+                    
+                    {% if setting.Type != 3 %}
+                        <label for="{{setting.Key}}">{{setting.Title}}</label>
+                    {% endif %}
+                    
                     {% if setting.Type == 0 %}
                         <input type="text" id="{{setting.Key}}" name="{{setting.Title}}">
                     {% endif %}
@@ -103,7 +158,13 @@
                     {% if setting.Type == 3 %}
 
                         {% if setting.Options.size == 1 %}
-                            <input type="checkbox" id="{{setting.Key}}" name="{{setting.Options.first}}">
+                            <div class="checkbox-container">
+                                <label class="checkbox">
+                                    {{ setting.Title }}
+                                    <input type="checkbox" id="{{setting.Key}}"/>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
                         {% endif %}
 
                         {% if setting.Options.size > 1 %}

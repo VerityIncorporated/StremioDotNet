@@ -45,10 +45,37 @@ AddonBuilder ConfigureAddon() => new AddonBuilder(
     }
 ]).SetBehaviorHints(configurable: true).SetConfig([new Config
     {
-        Key = "testkey",
+        Key = "testText",
         Type = Config.ConfigType.Text,
-        Title = "Test",
-    }
+        Title = "Test Text",
+    },
+    new Config
+    {
+        Key = "testPassword",
+        Type = Config.ConfigType.Password,
+        Title = "Test Password"
+    },
+    new Config
+    {
+        Key = "testCheckBoxSingle",
+        Type = Config.ConfigType.Checkbox,
+        Title = "Test Checkbox (Single)",
+        Options = ["Enabled Something"]
+    },
+    new Config
+    {
+        Key = "testCheckBoxMulti",
+        Type = Config.ConfigType.Checkbox,
+        Title = "Test Checkbox (Multi)",
+        Options = ["Enabled Something", "Enabled Something Else"]
+    },
+    new Config
+    {
+        Key = "testSelect",
+        Type = Config.ConfigType.Select,
+        Title = "Test Select",
+        Options = ["Select This", "Select That"]
+    },
 ]);
 
 if (app.Environment.IsProduction())

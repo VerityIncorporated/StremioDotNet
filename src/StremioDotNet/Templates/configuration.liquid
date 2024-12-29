@@ -94,15 +94,27 @@
                         <input type="number" id="{{setting.Key}}" name="{{setting.Title}}">
                     {% endif %}
                     {% if setting.Type == 2 %}
-                        <input type="checkbox" id="{{setting.Key}}" name="{{setting.Title}}">
+                        <input type="password" id="{{setting.Key}}" name="{{setting.Title}}">
                     {% endif %}
                     {% if setting.Type == 3 %}
-                        <input type="password" id="{{setting.Key}}" name="{{setting.Title}}">
+
+                        {% if setting.Options.size == 1 %}
+                            <input type="checkbox" id="{{setting.Key}}" name="{{setting.Options.first}}">
+                        {% endif %}
+
+                        {% if setting.Options.size > 1 %}
+                            <select id="{{setting.Key}}" name="{{setting.Title}}" multiple>
+                                {% for option in setting.Options %}
+                                    <option value="{{ option }}">{{ option }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                        
                     {% endif %}
                     {% if setting.Type == 4 %}
                         <select id="{{setting.Key}}" name="{{setting.Title}}">
                             {% for option in setting.Options %}
-                                <option value="{{option.Value}}">{{option.Text}}</option>
+                                <option value="{{option}}">{{option}}</option>
                             {% endfor %}
                         </select>
                     {% endif %}

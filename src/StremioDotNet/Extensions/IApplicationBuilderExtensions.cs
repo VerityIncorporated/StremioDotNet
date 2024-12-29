@@ -59,7 +59,7 @@ public static class IApplicationBuilderExtensions
                 await context.Response.WriteAsJsonAsync(manifest);
             });
             
-            endpoints.MapGet("/configuration", async context =>
+            endpoints.MapGet("/configure", async context =>
             {
                 // Build the manifest object (e.g., app configuration or settings)
                 var manifest = builder.BuildManifest();
@@ -74,7 +74,6 @@ public static class IApplicationBuilderExtensions
                     // Create a TemplateContext with the manifest data to pass to the template
                     var templateContext = new TemplateContext(manifest);
                     templateContext.Options.MemberAccessStrategy.Register<Config>();
-                    templateContext.Options.MemberAccessStrategy.Register<Config.ConfigType>();
                     var renderedHtml = await template.RenderAsync(templateContext);
                     
                     // Set the response content type to "text/html"

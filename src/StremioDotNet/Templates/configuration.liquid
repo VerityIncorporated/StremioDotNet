@@ -168,7 +168,7 @@
                         {% endif %}
 
                         {% if setting.Options.size > 1 %}
-                            <select id="{{setting.Key}}" name="{{setting.Title}}" multiple>
+                            <select id="{{setting.Key}}" name="{{setting.Title}}">
                                 {% for option in setting.Options %}
                                     <option value="{{ option }}">{{ option }}</option>
                                 {% endfor %}

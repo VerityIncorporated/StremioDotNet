@@ -33,14 +33,9 @@
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
-    
-    <ItemGroup>
-      <PackageReference Include="Fluid.Core" Version="2.16.0" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Templates\configuration.liquid" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
 </Project>

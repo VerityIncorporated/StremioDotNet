@@ -1,10 +1,7 @@
-﻿using System.Reflection;
-using Fluid;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using StremioDotNet.Builders;
 using StremioDotNet.Middleware;
-using StremioDotNet.Structs.Manifest;
 
 namespace StremioDotNet.Extensions;
 
@@ -59,7 +56,8 @@ public static class IApplicationBuilderExtensions
                 await context.Response.WriteAsJsonAsync(manifest);
             });
             
-            endpoints.MapGet("/configure", async context =>
+            // Configuration page using Liquid, no longer being worked on since I am not proficient in front-end web development.
+            /*endpoints.MapGet("/configure", async context =>
             {
                 // Build the manifest object (e.g., app configuration or settings)
                 var manifest = builder.BuildManifest();
@@ -87,7 +85,7 @@ public static class IApplicationBuilderExtensions
                     context.Response.StatusCode = 500;
                     await context.Response.WriteAsync($"Error parsing template: {error ?? "Unknown error"}");
                 }
-            });
+            });*/
         });
 
         if (!builder.publishToCentral) return;
@@ -95,8 +93,9 @@ public static class IApplicationBuilderExtensions
         var httpClient = app.ApplicationServices.GetService(typeof(HttpClient)) as HttpClient;
         AddonPublisher.PublishToCentral(builder.publishToCentralDomain!, httpClient!);
     }
-    
-    static string GetEmbeddedResource(string resourceName)
+
+    // Used to get the Liquid resource, no longer being worked on since I am not proficient in front-end web development.
+    /*static string GetEmbeddedResource(string resourceName)
     {
         var assembly = Assembly.GetExecutingAssembly();
         
@@ -110,5 +109,5 @@ public static class IApplicationBuilderExtensions
         using var reader = new StreamReader(stream);
         
         return reader.ReadToEnd();
-    }
+    }*/
 }

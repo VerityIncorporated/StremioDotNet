@@ -51,7 +51,7 @@ public class ImdbIdResolutionMiddleware : IMiddleware
             if (!string.IsNullOrEmpty(imdbId))
             {
                 var metadata = await ResolveImdbIdToMetadataAsync(streamAttribute.Type, imdbId);
-                context.Items[imdbId] = metadata; // Store metadata in the context items collection
+                context.Items[imdbId + ".json"] = metadata; // Store metadata in the context items collection
             }
         }
             
